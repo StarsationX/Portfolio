@@ -65,7 +65,7 @@ export default function About() {
             <Card className="relative overflow-hidden rounded-xl border-2 border-primary/20">
               <CardContent className="p-0">
                 <Image
-                  src="/placeholder.svg?height=600&width=600"
+                  src="https://i.imgur.com/RVHTwYh.png?height=600&width=600"
                   alt="Developer Portrait"
                   width={600}
                   height={600}

@@ -12,12 +12,12 @@ import { useMobile } from "@/hooks/use-mobile"
 const projects = [
   {
     id: 1,
-    title: "Immersive 3D Portfolio",
-    description: "A portfolio website with interactive 3D elements and animations built with Three.js and React.",
-    image: "/placeholder.svg?height=400&width=600",
-    tags: ["React", "Three.js", "GSAP"],
-    github: "#",
-    demo: "#",
+    title: "Roblox Evade Utils",
+    description: "A Lua script that has several features to help.",
+    image: "https://i.imgur.com/fNBQKcV.png?height=400&width=600",
+    tags: ["Lua", "Reverse Engineer", "Algorithm"],
+    github: "https://github.com/StarsationX/The-Hexation",
+    demo: "https://github.com/StarsationX/The-Hexation",
   },
   {
     id: 2,
@@ -97,14 +97,18 @@ function ProjectCard({ project }) {
             <h3 className="text-xl font-bold mb-4">{project.title}</h3>
             <p className="text-muted-foreground mb-6">{project.description}</p>
             <div className="flex gap-4">
+            <a href={project.github}>
               <Button size="sm" variant="outline" className="gap-2">
                 <Github className="h-4 w-4" />
                 Code
               </Button>
-              <Button size="sm" className="gap-2">
-                <ExternalLink className="h-4 w-4" />
-                Live Demo
-              </Button>
+            </a>
+              <a href={project.demo}>
+                <Button size="sm" className="gap-2">
+                  <ExternalLink className="h-4 w-4" />
+                  Live Demo
+                </Button>
+              </a>
             </div>
           </CardContent>
         </Card>

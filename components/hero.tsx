@@ -156,8 +156,8 @@ function RubiksCube() {
         shadow-mapSize={[2048, 2048]}
       />
       <spotLight position={[-5, 5, 5]} angle={0.3} penumbra={1} intensity={2} castShadow />
-      <pointLight position={[0, 0, 5]} intensity={1.5} color="#ffffff" />
-      <pointLight position={[0, 0, -5]} intensity={1} color="#0000ff" />
+      <pointLight position={[0, -5, 0]} intensity={1.5} color="#ffffff" />
+      <pointLight position={[0, 0, -5]} intensity={3} color="#0000ff" />
       <group
         ref={cubeRef}
         onPointerDown={handlePointerDown}
@@ -243,9 +243,9 @@ export default function Hero() {
               transition={{ duration: 0.5, delay: 0.1 }}
               className="text-5xl md:text-6xl lg:text-7xl font-bold text-white"
             >
-              Creative
+              Starsation's
               <br />
-              Developer
+              Portfolio
             </motion.h1>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
@@ -253,7 +253,7 @@ export default function Hero() {
               transition={{ duration: 0.5, delay: 0.2 }}
               className="text-xl text-gray-400 max-w-lg"
             >
-              Crafting immersive digital experiences that push the boundaries of web development.
+              I'm just a Lua and Cpp enjoyer that just got in to WebDev
             </motion.p>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
