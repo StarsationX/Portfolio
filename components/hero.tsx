@@ -2,19 +2,15 @@
 
 import { useRef, useState } from "react"
 import { motion } from "framer-motion"
-import { Canvas, useFrame } from "@react-three/fiber"
+import { Canvas, useFrame, ThreeElements } from "@react-three/fiber"
 import { Environment, PresentationControls, ContactShadows } from "@react-three/drei"
+import * as THREE from "three"
 import { Button } from "@/components/ui/button"
 import { ArrowRight, ChevronRight } from "lucide-react"
 
-// Rubik's Cube component
 function RubiksCube() {
-  const cubeRef = useRef()
+  const cubeRef = useRef<THREE.Group>(null)
   const [clicked, setClicked] = useState(false)
-  const lightRef = useRef()
-
-  // Helper to visualize the light (only in development)
-  // useHelper(lightRef, THREE.SpotLightHelper, 'cyan')
 
   // Gentle rotation animation
   useFrame(({ clock }) => {
@@ -26,18 +22,30 @@ function RubiksCube() {
   })
 
   // Create a single cubie (small cube)
-  const Cubie = ({ position }) => {
+  const Cubie = ({ position }: { position: [number, number, number] }) => {
     return (
-      <mesh position={position} castShadow receiveShadow>
-        <boxGeometry args={[0.95, 0.95, 0.95]} />
-        <meshStandardMaterial color="#111111" roughness={0.3} metalness={0.8} />
+      <mesh 
+        position={position} 
+        castShadow 
+        receiveShadow
+        scale={[0.95, 0.95, 0.95]} 
+      >
+        <boxGeometry args={[1, 1, 1]} />
+        <meshPhysicalMaterial 
+          color="#111111" 
+          roughness={0.3} 
+          metalness={0.8} 
+          clearcoat={1}
+          clearcoatRoughness={0.2}
+          reflectivity={0.5}
+        />
       </mesh>
     )
   }
 
   // Create a 3x3x3 Rubik's Cube
   const createCubies = () => {
-    const cubies = []
+    const cubies: JSX.Element[] = []
     const positions = [-1, 0, 1]
 
     positions.forEach((x) => {
@@ -56,18 +64,36 @@ function RubiksCube() {
 
   return (
     <>
-      {/* Add dramatic lighting */}
       <spotLight
-        ref={lightRef}
         position={[5, 5, 5]}
         angle={0.3}
-        penumbra={0.8}
-        intensity={1.5}
+        penumbra={1}
+        intensity={3}
         castShadow
         shadow-mapSize={[2048, 2048]}
       />
-      <spotLight position={[-5, 5, 5]} angle={0.3} penumbra={0.8} intensity={0.8} castShadow />
-      <group ref={cubeRef} onPointerDown={() => setClicked(!clicked)}>
+      <spotLight 
+        position={[-5, 5, 5]} 
+        angle={0.3} 
+        penumbra={1} 
+        intensity={2} 
+        castShadow 
+      />
+      <pointLight 
+        position={[0, 0, 5]} 
+        intensity={1.5} 
+        color="#ffffff" 
+      />
+      <pointLight 
+        position={[0, 0, -5]} 
+        intensity={1} 
+        color="#0000ff" 
+      />
+
+      <group 
+        ref={cubeRef} 
+        onPointerDown={() => setClicked(!clicked)}
+      >
         {createCubies()}
       </group>
     </>
@@ -79,22 +105,23 @@ function AnimatedBackground() {
     <Canvas
       className="w-full h-full"
       camera={{ position: [5, 2, 5], fov: 50 }}
-      dpr={[1, 2]} // Optimize for performance and quality
+      dpr={[1, 2]} 
       shadows
     >
       <color attach="background" args={["#000000"]} />
-      <ambientLight intensity={0.2} />
+      <ambientLight intensity={0.5} />
 
-      {/* Make the entire scene interactive with PresentationControls */}
       <PresentationControls
         global
         rotation={[0, 0, 0]}
-        polar={[-Math.PI / 3, Math.PI / 3]} // Limit vertical rotation
-        azimuth={[-Math.PI / 3, Math.PI / 3]} // Limit horizontal rotation
+        polar={[-Math.PI / 3, Math.PI / 3]}
+        azimuth={[-Math.PI / 3, Math.PI / 3]}
         config={{ mass: 2, tension: 400 }}
         snap={{ mass: 4, tension: 300 }}
-        style={{ touchAction: "none" }} // Fix touch action for mobile
-        // Add constraints to prevent the cube from going out of view
+        style={{ 
+          touchAction: "none",  // Explicitly set touch-action to none
+          pointerEvents: "auto" 
+        }}
         zoom={0.8}
         minZoom={0.5}
         maxZoom={1.5}
@@ -102,8 +129,14 @@ function AnimatedBackground() {
         <RubiksCube />
       </PresentationControls>
 
-      <ContactShadows position={[0, -2, 0]} opacity={0.5} scale={5} blur={2.5} />
-      <Environment preset="night" />
+      <ContactShadows 
+        position={[0, -2, 0]} 
+        opacity={0.7} 
+        scale={5} 
+        blur={2.5} 
+        far={4} 
+      />
+      <Environment preset="city" />
     </Canvas>
   )
 }
@@ -126,9 +159,7 @@ export default function Hero() {
   return (
     <section className="relative min-h-screen w-full bg-black overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28">
-        {/* Reverse order on mobile, normal on desktop */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          {/* 3D Cube - will appear first on mobile */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -138,7 +169,7 @@ export default function Hero() {
             <AnimatedBackground />
           </motion.div>
 
-          {/* Content - will appear second on mobile */}
+          {/* Rest of the component remains the same */}
           <div className="space-y-8 order-2 lg:order-1">
             <motion.div
               initial={{ opacity: 0 }}
@@ -196,4 +227,3 @@ export default function Hero() {
     </section>
   )
 }
-
