@@ -6,7 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Button } from "@/components/ui/button"
-import { Github, Linkedin, Mail, Send, Twitter } from "lucide-react"
+import { Github, Linkedin, Mail, Send, Twitter, Facebook } from "lucide-react"
 import { useToast } from "@/hooks/use-toast"
 
 export default function Contact() {
@@ -31,7 +31,7 @@ export default function Contact() {
 
     try {
       // Using Formspree to handle form submissions
-      const response = await fetch("https://formspree.io/f/xleqnvgr", {
+      const response = await fetch("https://formspree.io/f/movelrld", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -47,7 +47,7 @@ export default function Contact() {
       if (response.ok) {
         toast({
           title: "Message sent!",
-          description: "Thank you for your message. I'll get back to you soon.",
+          description: "Thank you for your message. I'll get back to you asap!",
           variant: "default",
         })
         // Reset form
@@ -106,10 +106,28 @@ export default function Contact() {
                     <p className="text-muted-foreground">starsationx@gmail.com</p>
                   </div>
                 </div>
-
+                <div className="flex items-center gap-4">
+                  <div className="bg-primary/10 p-3 rounded-full">
+                    <Facebook className="h-6 w-6 text-primary" />
+                  </div>
+                  <div>
+                    <p className="font-medium">Facebook</p>
+                    <p className="text-muted-foreground">Daiki Sukinatori | Main Accout</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-4">
+                  <div className="bg-primary/10 p-3 rounded-full">
+                    <Facebook className="h-6 w-6 text-primary" />
+                  </div>
+                  <div>
+                    <p className="font-medium">Facebook</p>
+                    <p className="text-muted-foreground">Daiki Starsation | Work Account</p>
+                  </div>
+                </div>
                 <div className="space-y-4 pt-4">
                   <p className="font-medium">Connect with me</p>
                   <div className="flex gap-4">
+                    <a href="https://github.com/starsationx">
                     <Button
                       variant="outline"
                       size="icon"
@@ -117,20 +135,16 @@ export default function Contact() {
                     >
                       <Github className="h-5 w-5" />
                     </Button>
+                    </a>
+                    <a href="https://www.facebook.com/daiki.starsation">
                     <Button
                       variant="outline"
                       size="icon"
                       className="rounded-full hover:bg-primary hover:text-primary-foreground transition-all duration-300"
                     >
-                      <Linkedin className="h-5 w-5" />
+                      <Facebook className="h-5 w-5" />
                     </Button>
-                    <Button
-                      variant="outline"
-                      size="icon"
-                      className="rounded-full hover:bg-primary hover:text-primary-foreground transition-all duration-300"
-                    >
-                      <Twitter className="h-5 w-5" />
-                    </Button>
+                    </a>
                   </div>
                 </div>
               </CardContent>

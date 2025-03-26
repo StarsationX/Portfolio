@@ -9,7 +9,7 @@ import ThemeToggle from "@/components/theme-toggle"
 
 export default function Home() {
   return (
-    <main className="relative min-h-screen w-full overflow-hidden bg-gradient-to-br from-background to-background/50">
+    <main className="relative min-h-screen w-full overflow-hidden bg-background">
       <div className="fixed top-6 right-6 z-50">
         <ThemeToggle />
       </div>

@@ -7,18 +7,15 @@ import { Badge } from "@/components/ui/badge"
 import { Card, CardContent } from "@/components/ui/card"
 
 const skills = [
-  "React",
-  "Next.js",
-  "TypeScript",
-  "Tailwind CSS",
-  "Three.js",
-  "Framer Motion",
+  "Lua",
+  "C++",
+  "Python",
   "Node.js",
-  "GraphQL",
+  "HTML",
+  "CSS",
   "UI/UX Design",
   "Responsive Design",
-  "WebGL",
-  "GSAP",
+  "Physical IT",
 ]
 
 export default function About() {
@@ -78,12 +75,12 @@ export default function About() {
           <div className="space-y-8">
             <motion.div variants={itemVariants}>
               <h2 className="text-3xl md:text-4xl font-bold mb-6">About Me</h2>
-              <TypewriterEffect text="I'm a creative developer passionate about building immersive digital experiences." />
+              <TypewriterEffect text="I'm a developer passionate about all sort of things in IT, SDA and WebDev" />
             </motion.div>
 
             <motion.p variants={itemVariants} className="text-muted-foreground text-lg">
               With a focus on pushing the boundaries of what's possible on the web, I combine technical expertise with
-              creative vision to craft memorable user experiences that stand out.
+              creative vision to craft memorable user experiences that WILL stand out.
             </motion.p>
 
             <motion.div variants={itemVariants}>

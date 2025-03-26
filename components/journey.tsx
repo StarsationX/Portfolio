@@ -7,31 +7,31 @@ import { Badge } from "@/components/ui/badge"
 
 const journeyItems = [
   {
-    year: "2023",
-    title: "Senior Frontend Developer",
-    company: "Tech Innovations Inc.",
+    year: "2017",
+    title: "The Beginning of the Journey",
+    company: "Nonthaburi IT School.",
     description:
-      "Led the development of cutting-edge web applications using React and Three.js, focusing on creating immersive user experiences.",
+      "I started learning the basics of Physical IT, including hardware, software, and some networking stuffs.",
   },
   {
     year: "2021",
-    title: "Frontend Developer",
-    company: "Digital Solutions Ltd.",
-    description: "Developed responsive web applications and implemented modern UI/UX designs using React and Next.js.",
+    title: "Chapter 2: Advanced IT",
+    company: "Chitralada Technology Institute.",
+    description: "I learned more about IT, including programming, web development, and networking.",
   },
   {
-    year: "2019",
-    title: "UI/UX Designer",
-    company: "Creative Studio",
+    year: "2022",
+    title: "Main Quest: Xenon Hub",
+    company: "Xenon Hub",
     description:
-      "Created user-centered designs and prototypes for web and mobile applications, focusing on usability and accessibility.",
+      "I joined Xenon Hub as a Support aka. Customer Service and I learn mroe about Lua and Reverse Engineering some Roblox games.",
   },
   {
-    year: "2017",
-    title: "Web Developer Intern",
-    company: "StartUp Hub",
+    year: "2025",
+    title: "Now",
+    company: "?",
     description:
-      "Assisted in the development of websites and web applications, learning modern web development practices.",
+      "I'm getting myself into the world of Web Development and SDA and I'm learning more about it.",
   },
 ]
 

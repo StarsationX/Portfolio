@@ -72,7 +72,7 @@ export default function Personal() {
                 <CardContent className="p-0">
                   <div className="relative">
                     <Image
-                      src="/placeholder.svg?height=600&width=600"
+                      src="https://i.imgur.com/G3Cnaj0.jpeg?height=600&width=600"
                       alt="Couple Photo"
                       width={600}
                       height={600}

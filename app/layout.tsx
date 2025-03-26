@@ -1,11 +1,14 @@
 import type React from "react"
+import type { Metadata } from "next"
+import { Inter } from "next/font/google"
 import "@/app/globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 
-export const metadata = {
+const inter = Inter({ subsets: ["latin"] })
+
+export const metadata: Metadata = {
   title: "Creative Developer Portfolio",
   description: "A portfolio showcasing creative web development projects and skills",
-    generator: 'v0.dev'
 }
 
 export default function RootLayout({
@@ -15,8 +18,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className="dark">
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={true} disableTransitionOnChange>
+      <body className={inter.className}>
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false} storageKey="portfolio-theme">
           {children}
         </ThemeProvider>
       </body>
@@ -24,6 +27,3 @@ export default function RootLayout({
   )
 }
 
-
-
-import './globals.css'
