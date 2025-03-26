@@ -4,10 +4,44 @@ import type React from "react"
 
 import { useRef, useState } from "react"
 import { Canvas, useFrame, useThree } from "@react-three/fiber"
-import { Environment, PresentationControls, ContactShadows } from "@react-three/drei"
+import { PresentationControls, ContactShadows } from "@react-three/drei"
 import * as THREE from "three"
 import { useTheme } from "next-themes"
 import type { JSX } from "react/jsx-runtime"
+
+// Custom environment component with brighter lighting
+function CustomEnvironment() {
+  return (
+    <>
+      {/* Increased ambient light for brighter overall illumination */}
+      <ambientLight intensity={1.2} />
+
+      {/* Brighter main directional light */}
+      <directionalLight position={[10, 10, 5]} intensity={3} castShadow shadow-mapSize={[2048, 2048]} />
+
+      {/* Brighter fill light from the opposite side */}
+      <directionalLight position={[-10, 8, -5]} intensity={1.5} color="#8080ff" />
+
+      {/* Additional rim light to highlight edges */}
+      <directionalLight position={[5, 0, -10]} intensity={5} color="#ffffff" />
+      <directionalLight position={[-5, 0, 10]} intensity={5} color="#ffffff" />
+      <directionalLight position={[10, 0, -10]} intensity={5} color="#ffffff" />
+      <directionalLight position={[10, 8, 5]} intensity={1.5} color="#8080ff" />
+      {/* Bottom light for subtle illumination */}
+      <directionalLight position={[0, -5, 0]} intensity={0.8} color="#ffffff" />
+
+      {/* Add a spotlight for dramatic highlighting */}
+      <spotLight
+        position={[5, 8, 0]}
+        angle={0.3}
+        penumbra={1}
+        intensity={6}
+        castShadow
+        shadow-mapSize={[2048, 2048]}
+      />
+    </>
+  )
+}
 
 function RubiksCube() {
   const cubeRef = useRef<THREE.Group>(null)
@@ -99,14 +133,14 @@ function RubiksCube() {
     }
   })
 
-  // Create black materials for each face
+  // Create black materials for each face with increased reflectivity
   const faceMaterials = [
-    new THREE.MeshStandardMaterial({ color: "#000000", roughness: 0.3, metalness: 0.8 }), // Right face
-    new THREE.MeshStandardMaterial({ color: "#000000", roughness: 0.3, metalness: 0.8 }), // Left face
-    new THREE.MeshStandardMaterial({ color: "#000000", roughness: 0.3, metalness: 0.8 }), // Top face
-    new THREE.MeshStandardMaterial({ color: "#000000", roughness: 0.3, metalness: 0.8 }), // Bottom face
-    new THREE.MeshStandardMaterial({ color: "#000000", roughness: 0.3, metalness: 0.8 }), // Front face
-    new THREE.MeshStandardMaterial({ color: "#000000", roughness: 0.3, metalness: 0.8 }), // Back face
+    new THREE.MeshStandardMaterial({ color: "#000000", roughness: 0.2, metalness: 0.9 }), // Right face
+    new THREE.MeshStandardMaterial({ color: "#000000", roughness: 0.2, metalness: 0.9 }), // Left face
+    new THREE.MeshStandardMaterial({ color: "#000000", roughness: 0.2, metalness: 0.9 }), // Top face
+    new THREE.MeshStandardMaterial({ color: "#000000", roughness: 0.2, metalness: 0.9 }), // Bottom face
+    new THREE.MeshStandardMaterial({ color: "#000000", roughness: 0.2, metalness: 0.9 }), // Front face
+    new THREE.MeshStandardMaterial({ color: "#000000", roughness: 0.2, metalness: 0.9 }), // Back face
   ]
 
   const Cubie = ({ position }: { position: [number, number, number] }) => {
@@ -142,10 +176,6 @@ function RubiksCube() {
 
   return (
     <>
-      <spotLight position={[5, 5, 5]} angle={0.3} penumbra={1} intensity={3} castShadow shadow-mapSize={[2048, 2048]} />
-      <spotLight position={[-5, 5, 5]} angle={0.3} penumbra={1} intensity={2} castShadow />
-      <pointLight position={[0, -5, 0]} intensity={1.5} color="#ffffff" />
-      <pointLight position={[0, 0, -5]} intensity={3} color="#0000ff" />
       <group
         ref={cubeRef}
         onPointerDown={handlePointerDown}
@@ -165,7 +195,10 @@ export default function AnimatedBackground() {
   return (
     <Canvas className="w-full h-full" camera={{ position: [5, 2, 5], fov: 50 }} dpr={[1, 2]} shadows>
       <color attach="background" args={[bgColor]} />
-      <ambientLight intensity={0.5} />
+
+      {/* Custom environment lighting instead of Environment component */}
+      <CustomEnvironment />
+
       <PresentationControls
         global
         rotation={[0, 0, 0]}
@@ -181,7 +214,6 @@ export default function AnimatedBackground() {
         <RubiksCube />
       </PresentationControls>
       <ContactShadows position={[0, -2, 0]} opacity={0.7} scale={5} blur={2.5} far={4} />
-      <Environment preset="city" />
     </Canvas>
   )
 }
